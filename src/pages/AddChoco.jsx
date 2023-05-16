@@ -13,14 +13,14 @@ const AddChoco = () => {
     const select = form.select.value;
 
     const newChocolate = { name, country, url, select };
-    fetch(`https://chocolate-server.vercel.app/add`, {
+    fetch(`http://localhost:5000/add`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newChocolate),
     })
       .then((res) => res.json())
       .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.code));
   };
 
   return (
@@ -35,7 +35,6 @@ const AddChoco = () => {
       <hr />
       <div className="h-full block w-full bg-gray-200 px-5   my-10 py-12">
         <div className="text-center ">
-
           <h2 className="text-base md:text-lg text-gray-800  lg:text-xl capitalize font-bold">
             new chocolates
           </h2>
@@ -44,7 +43,7 @@ const AddChoco = () => {
             Use the below form to create a new product
           </p>
         </div>
-        
+
         <div>
           <form
             onSubmit={handleFormSubmit}

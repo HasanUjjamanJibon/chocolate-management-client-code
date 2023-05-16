@@ -3,15 +3,19 @@ import { Link, useLoaderData } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
-
+import { app } from "../../firebase.config";
+import { getAuth } from "firebase/auth";
+const auth = getAuth(app);
+console.log(auth);
 const Home = () => {
   const allChoclates = useLoaderData();
-  const [update, setUpdate] = useState(allChoclates);
+
+  const [update, setUpdate] = useState(allChoclates || [{}, {}]);
   let serial = 1;
 
   // handle delete choclate
   const handleDelete = (id) => {
-    fetch(`https://chocolate-server.vercel.app/chocolate/${id}`, {
+    fetch(`http://localhost:5000/chocolate/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -52,7 +56,7 @@ const Home = () => {
             {/* row 1 */}
             {update &&
               update?.map((chocolate) => (
-                <tr key={chocolate._id}>
+                <tr key={chocolate?._id}>
                   <th>{serial++}</th>
                   <td>
                     <img

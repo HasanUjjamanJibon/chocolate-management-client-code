@@ -16,7 +16,7 @@ const UpdateChoco = () => {
     console.log(name, country, url, select);
     const updateCoffee = { name, country, url, select };
 
-    fetch(`https://chocolate-server.vercel.app/chocolate/${_id}`, {
+    fetch(`http://localhost:5000/chocolate/${_id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updateCoffee),
