@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
+import Swal from "sweetalert2";
 
 const UpdateChoco = () => {
   const singleChoco = useLoaderData();
@@ -13,17 +14,22 @@ const UpdateChoco = () => {
     const country = form.country.value;
     const url = form.photoURL.value;
     const select = form.select.value;
-    console.log(name, country, url, select);
     const updateCoffee = { name, country, url, select };
 
-    fetch(`http://localhost:5000/chocolate/${_id}`, {
+    fetch(`https://chocolate-server.vercel.app/chocolate/${_id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updateCoffee),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          Swal.fire("wow!", "Chocolate Information Updated!", "success");
+        }
+      })
       .catch((err) => console.log(err));
+    form.reset();
   };
 
   return (
@@ -36,7 +42,7 @@ const UpdateChoco = () => {
         all chocolates
       </Link>
       <hr />
-      <div className="h-full block w-full bg-gray-200  my-10 py-12">
+      <div className="h-full block w-full bg-gray-200 px-5   my-10 py-12">
         <div className="text-center ">
           <h2 className="text-base md:text-lg text-gray-800  lg:text-xl capitalize font-bold">
             update chocolates : {name}

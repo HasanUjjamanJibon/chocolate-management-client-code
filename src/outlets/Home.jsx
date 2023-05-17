@@ -5,8 +5,9 @@ import { FiEdit2 } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 import { app } from "../../firebase.config";
 import { getAuth } from "firebase/auth";
+import Swal from "sweetalert2";
 const auth = getAuth(app);
-console.log(auth);
+
 const Home = () => {
   const allChoclates = useLoaderData();
 
@@ -15,12 +16,13 @@ const Home = () => {
 
   // handle delete choclate
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/chocolate/${id}`, {
+    fetch(`https://chocolate-server.vercel.app/chocolate/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => {
         const remaining = update?.filter((choco) => choco._id !== id);
+        Swal.fire("Yes!", "You Successfully Deleted!", "success");
         setUpdate(remaining);
       })
       .catch((err) => console.log(err));
@@ -52,7 +54,7 @@ const Home = () => {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody className="">
+          <tbody>
             {/* row 1 */}
             {update &&
               update?.map((chocolate) => (

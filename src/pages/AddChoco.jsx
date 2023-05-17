@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
+import Swal from "sweetalert2";
 
 const AddChoco = () => {
   // form Submit
@@ -13,14 +14,20 @@ const AddChoco = () => {
     const select = form.select.value;
 
     const newChocolate = { name, country, url, select };
-    fetch(`http://localhost:5000/add`, {
+    fetch(`https://chocolate-server.vercel.app/add`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newChocolate),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        if (data.insertedId) {
+          console.log(data);
+          Swal.fire("Good job!", "Chocolate Added Successfully!", "success");
+        }
+      })
       .catch((err) => console.log(err.code));
+    form.reset();
   };
 
   return (

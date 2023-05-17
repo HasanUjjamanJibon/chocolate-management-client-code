@@ -17,7 +17,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/chocolate"),
+        loader: () => fetch("https://chocolate-server.vercel.app/chocolate"),
       },
       {
         path: "add_choco",
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         path: "update_choco/:id",
         element: <UpdateChoco />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/chocolate/${params.id}`),
+          fetch(`https://chocolate-server.vercel.app/chocolate/${params.id}`),
       },
     ],
   },
