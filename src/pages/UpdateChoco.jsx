@@ -16,11 +16,14 @@ const UpdateChoco = () => {
     const select = form.select.value;
     const updateCoffee = { name, country, url, select };
 
-    fetch(`https://chocolate-server.vercel.app/chocolate/${_id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(updateCoffee),
-    })
+    fetch(
+      `https://chocolate-management-server-code.up.railway.app/chocolate/${_id}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(updateCoffee),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

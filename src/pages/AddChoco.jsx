@@ -14,7 +14,7 @@ const AddChoco = () => {
     const select = form.select.value;
 
     const newChocolate = { name, country, url, select };
-    fetch(`https://chocolate-server.vercel.app/add`, {
+    fetch(`https://chocolate-management-server-code.up.railway.app/add`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newChocolate),

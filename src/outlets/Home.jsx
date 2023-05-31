@@ -16,9 +16,12 @@ const Home = () => {
 
   // handle delete choclate
   const handleDelete = (id) => {
-    fetch(`https://chocolate-server.vercel.app/chocolate/${id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://chocolate-management-server-code.up.railway.app/chocolate/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         const remaining = update?.filter((choco) => choco._id !== id);
